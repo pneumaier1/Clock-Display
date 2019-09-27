@@ -22,6 +22,7 @@ public class ClockDisplay
      * Constructor for ClockDisplay objects. This constructor 
      * creates a new clock set at 00:00.
      */
+
     public ClockDisplay()
     {
         hours = new NumberDisplay(24);
@@ -29,16 +30,15 @@ public class ClockDisplay
         updateDisplay();
     }
 
+
     /**
      * Constructor for ClockDisplay objects. This constructor
      * creates a new clock set at the time specified by the 
      * parameters.
      */
-    public ClockDisplay(int hour, int minute)
+    public ClockDisplay(int hour, int minute, String show)
     {
-        hours = new NumberDisplay(24);
-        minutes = new NumberDisplay(60);
-        setTime(hour, minute);
+
     }
 
     /**
@@ -78,7 +78,25 @@ public class ClockDisplay
      */
     private void updateDisplay()
     {
-        displayString = hours.getDisplayValue() + ":" + 
-                        minutes.getDisplayValue();
+        String hoursString = "";
+        String showString = "";
+        
+        if(hours.getValue() >= 12)
+        {
+            if( (hours.getValue()-12)>= 0)
+            hoursString = "0" + (hours.getValue() - 12); 
+            
+            else
+            hoursString = "" + (hours.getDisplayValue());
+            showString = "pm";
+        }
+        else
+        {
+            hoursString= "" + hours.getDisplayValue();
+            showString= "am";
+        }
+        displayString = hoursString + ":" + 
+        minutes.getDisplayValue() + showString;
     }
+
 }
